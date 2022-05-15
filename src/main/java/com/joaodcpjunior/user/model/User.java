@@ -9,7 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-@Entity
+@Entity(name = "user_table")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
