@@ -4,6 +4,7 @@ import com.joaodcpjunior.user.model.Response;
 import com.joaodcpjunior.user.model.User;
 import com.joaodcpjunior.user.service.implementation.UserServiceImplementation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,15 +36,13 @@ public class UserResource {
 
     @PostMapping
     public ResponseEntity<Response> saveUser(@RequestBody @Valid User user) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(Map.of("user", userService.create(user)))
-                        .message("User created")
-                        .httpStatus(CREATED)
-                        .statusCode(CREATED.value())
-                        .build()
-        );
+        return ResponseEntity.status(CREATED).body(Response.builder()
+                .timeStamp(now())
+                .data(Map.of("user", userService.create(user)))
+                .message("User created")
+                .httpStatus(CREATED)
+                .statusCode(CREATED.value())
+                .build());
     }
 
     @GetMapping("/{id}")
