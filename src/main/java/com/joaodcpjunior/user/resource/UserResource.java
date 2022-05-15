@@ -51,7 +51,7 @@ public class UserResource {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("users", userService.get(id)))
+                        .data(Map.of("user", userService.get(id)))
                         .message("User retrieved")
                         .httpStatus(OK)
                         .statusCode(OK.value())

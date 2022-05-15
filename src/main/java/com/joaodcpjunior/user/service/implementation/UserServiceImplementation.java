@@ -34,7 +34,7 @@ public class UserServiceImplementation implements UserService {
     @Override
     public User get(Long id) {
         log.info("Fetching user by id: {}", id);
-        return userRepository.getById(id);
+        return userRepository.findById(id).get();
     }
 
     @Override
