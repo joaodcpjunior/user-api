@@ -23,7 +23,7 @@ public class UserResource {
 
     @GetMapping
     public ResponseEntity<Response> getUsers() {
-        return ResponseEntity.ok(
+        return ResponseEntity.status(OK).body(
                 Response.builder()
                         .timeStamp(now())
                         .data(Map.of("users", userService.list()))
@@ -36,18 +36,19 @@ public class UserResource {
 
     @PostMapping
     public ResponseEntity<Response> saveUser(@RequestBody @Valid User user) {
-        return ResponseEntity.status(CREATED).body(Response.builder()
-                .timeStamp(now())
-                .data(Map.of("user", userService.create(user)))
-                .message("User created")
-                .httpStatus(CREATED)
-                .statusCode(CREATED.value())
-                .build());
+        return ResponseEntity.status(CREATED).body(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("user", userService.create(user)))
+                        .message("User created")
+                        .httpStatus(CREATED)
+                        .statusCode(CREATED.value())
+                        .build());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Response> getUserById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(
+        return ResponseEntity.status(OK).body(
                 Response.builder()
                         .timeStamp(now())
                         .data(Map.of("user", userService.get(id)))
@@ -60,7 +61,7 @@ public class UserResource {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteUser(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(
+        return ResponseEntity.status(OK).body(
                 Response.builder()
                         .timeStamp(now())
                         .data(Map.of("deleted", userService.delete(id)))
